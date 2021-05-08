@@ -2,11 +2,14 @@
     <string name="app_name">TimeManager</string>
 
     <string name="incorrect_toast">密码错误</string>
-    
+
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
 
     <string name="course_name">课程名字</string>
     <string name="course_start">开始时间</string>
     <string name="course_classroom">上课教室</string>
+
+    <string name="event_name">事件名字</string>
+    <string name="event_time">发生时间</string>
 </resources>

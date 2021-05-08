@@ -39,10 +39,21 @@ public class LoadActivity extends AppCompatActivity {
                     Intent i = new Intent(LoadActivity.this, CourseEntryActivity.class);
                     startActivity(i);
                 }
-                else
-                {
-                    Toast.makeText(LoadActivity.this,R.string.incorrect_toast,Toast.LENGTH_SHORT).show();
+                else { Toast.makeText(LoadActivity.this,R.string.incorrect_toast,Toast.LENGTH_SHORT).show(); }
+            }
+        });
+
+        mStudentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String password = mPassword.getText().toString();
+                final String true_password = "6666";//学生默认密码
+
+                if(password.equals(true_password)){
+                    Intent i = new Intent(LoadActivity.this, EventActivity.class);
+                    startActivity(i);
                 }
+                else { Toast.makeText(LoadActivity.this,R.string.incorrect_toast,Toast.LENGTH_SHORT).show(); }
             }
         });
     }

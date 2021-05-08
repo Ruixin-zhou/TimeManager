@@ -3,4 +3,101 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="color_schedule_orange">#f6af80</color>
+    <color name="color_schedule_text">#282D40</color>
+    <color name="color_schedule_text_pre">#ABABAD</color>
+    <color name="color_text_grey">#ADADB9</color>
+    <color name="calendar_bg_color">#FFFFFF</color>
+    <color name="color_schedule_purple">#9082BD</color>
+    <color name="color_schedule_pink">#E67986</color>
+    <color name="color_schedule_yellow">#F7E373</color>
+    <color name="color_schedule_green">#009688</color>
+    <color name="color_schedule_blue">#679BE4</color>
+    <color name="color_schedule_grey">#B9B9BD</color>
+    <color name="color_schedule_start">#3D81E2</color>
+    <color name="color_schedule_finish">#EC4A5F</color>
+    <color name="color_schedule_title_text">#272E3E</color>
+    <color name="color_schedule_finish_title_text">#7F838F</color>
+    <color name="color_schedule_line">#E3E1EE</color>
+
+    <color name="color_schedule_normal">#9E9DC9</color>
+    <color name="color_schedule_focus">#9082BD</color>
+
+    <color name="color_circle_border">#706F7D</color>
+    <color name="color_add_event_set_border">#EEEEEE</color>
+    <color name="color_add_event_set_content">#F4F4F4</color>
+    <color name="color_add_event_text">#282D40</color>
+
+    <color name="color_cancel_normal">#B6B6B6</color>
+    <color name="color_cancel_pre">#9FB6B6B6</color>
+    <color name="color_confirm_normal">#8F81BC</color>
+    <color name="color_confirm_pre">#9F8F81BC</color>
+
+    <color name="color_show_finish_normal">#9E9DC9</color>
+    <color name="color_show_finish_pre">#B2B1D3</color>
+    <color name="color_finish_hint_text">#8D8BA0</color>
+
+    <color name="color_select_date_dialog_line">#B8B5D4</color>
+    <color name="color_select_date_dialog_edit_text_bg_normal">#C6C0DC</color>
+    <color name="color_select_date_dialog_edit_text_bg_focus">#A68BFF</color>
+    <color name="color_small_calendar_text">#7452E4</color>
+    <color name="color_dialog_shadow">#65000000</color>
+
+    <color name="color_input_location_bg">#F4F4F4</color>
+    <color name="color_input_location_text_hint">#AAA8B3</color>
+    <color name="color_input_location_text">#272E3E</color>
+
+    <color name="holiday_text_color">#9082BD</color>
+    <color name="select_circle_color">#FF8594</color>
+
+
+    <!--酷炫黑-->
+    <color name="colorPrimaryDarkBlack">#010001</color>
+    <color name="colorPrimaryBlack">#010001</color>
+    <color name="colorAccentBlack">#010001</color>
+
+    <!--少女红-->
+    <color name="colorPrimaryDarkGreen">#FF5050</color>
+    <color name="colorPrimaryGreen">#FF5050</color>
+    <color name="colorAccentGreen">#FF5050</color>
+
+    <!--胖次蓝-->
+    <color name="colorPrimaryDarkBlue">#4E77FF</color>
+    <color name="colorPrimaryBlue">#4E77FF</color>
+    <color name="colorAccentBlue">#4E77FF</color>
+
+    <!--基佬紫-->
+    <color name="colorPrimaryDarkPurple">#A33DF9</color>
+    <color name="colorPrimaryPurple">#A33DF9</color>
+    <color name="colorAccentPurple">#A33DF9</color>
+
+    <!--活力橙-->
+    <color name="colorPrimaryDarkOrange">#FF9150</color>
+    <color name="colorPrimaryOrange">#FF9150</color>
+    <color name="colorAccentOrange">#FF9150</color>
+
+    <!--大地棕-->
+    <color name="colorPrimaryDarkBrown">#88564D</color>
+    <color name="colorPrimaryBrown">#88564D</color>
+    <color name="colorAccentBrown">#88564D</color>
+
+    <color name="color_main_window_color">#f2f2f2</color>
+    <color name="black_33">#18000000</color>
+    <color name="grey">#607D8B</color>
+
+    <color name="background">#f7f7f7</color>
+    <color name="transparent">#00000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="text_black3">#333333</color>
+    <color name="text_black6">#666666</color>
+    <color name="text_black9">#999999</color>
+    <color name="text_red">#FF5050</color>
+
+
+    <color name="transparent_half">#a0000000</color>
+    <color name="transparent_half_orange">#a0ec6f1a</color>
+    <color name="colorDivide">#F9F9F9</color>
+    <color name="bg_line_light_gray">#9B9B9B</color>
 </resources>
