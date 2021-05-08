@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.timemanager.Crime.CrimeListActivity;
+import com.example.timemanager.Crime.CrimePagerActivity;
+
 public class LoadActivity extends AppCompatActivity {
 
     private EditText mLoad;
@@ -50,7 +53,7 @@ public class LoadActivity extends AppCompatActivity {
                 final String true_password = "6666";//学生默认密码
 
                 if(password.equals(true_password)){
-                    Intent i = new Intent(LoadActivity.this, EventActivity.class);
+                    Intent i = new Intent(LoadActivity.this, CrimeListActivity.class);
                     startActivity(i);
                 }
                 else { Toast.makeText(LoadActivity.this,R.string.incorrect_toast,Toast.LENGTH_SHORT).show(); }
