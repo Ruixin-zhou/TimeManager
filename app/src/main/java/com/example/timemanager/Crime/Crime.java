@@ -27,9 +27,7 @@ public class Crime {
         mTitle = title;
     }
 
-    public Date getDate() {
-        return mDate;
-    }
+    public Date getDate() { return mDate; }
 
     public void setDate(Date date) {
         mDate = date;

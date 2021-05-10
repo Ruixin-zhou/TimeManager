@@ -1,6 +1,7 @@
 package com.example.timemanager.Crime;
 
 import android.app.Activity;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,12 +26,14 @@ public class CrimeFragment extends Fragment {
 
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
+    private static final String DIALOG_TIME = "DialogTime";
 
     private static final int REQUEST_DATE = 0;
 
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
+    private Button mTimeButton;
     private Button mSaveButton;
     private Button mDeleteButton;
     private CheckBox mSolvedCheckBox;
@@ -75,6 +78,7 @@ public class CrimeFragment extends Fragment {
         });
 
         mDateButton = (Button) v.findViewById(R.id.crime_date);
+        mTimeButton = (Button) v.findViewById(R.id.crime_time);
         mSaveButton = (Button) v.findViewById(R.id.crime_save);
         mDeleteButton = (Button) v.findViewById(R.id.crime_cancel);
 
@@ -89,9 +93,20 @@ public class CrimeFragment extends Fragment {
                 dialog.show(manager, DIALOG_DATE);
             }
         });
+        mTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                TimePickerFragment dialog = TimePickerFragment
+                        .newInstance(mCrime.getDate());
+                dialog.setTargetFragment(CrimeFragment.this,REQUEST_DATE);
+                dialog.show(manager,DIALOG_TIME);
+            }
+        });
         mSaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updateDate();
                 getActivity().finish();
             }
         });
@@ -130,6 +145,15 @@ public class CrimeFragment extends Fragment {
     }
 
     private void updateDate() {
+        //int day1 = mCrime.getDate().getYear();
+        //int day2 = mCrime.getDate().getMonth();
+        //int day3 = mCrime.getDate().getDay();
+        //int day4 = mCrime.getDate().getDate();
+        //int hour = mCrime.getDate().getHours();
+        //int minute = mCrime.getDate().getMinutes();
+        //String day = day1+"年"+day2 +"月"+day3+"日 星期"+day4;
+        //String time = hour + ":" + minute;
         mDateButton.setText(mCrime.getDate().toString());
+        mTimeButton.setText(mCrime.getDate().toString());
     }
 }
