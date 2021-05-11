@@ -24,12 +24,37 @@
         android:text="@string/crime_details_label"
         style="?android:listSeparatorTextViewStyle"/>
 
-    <Button
-        android:id="@+id/crime_date"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/crime_date_text"
+            style="?android:listSeparatorTextViewStyle"
+            />
+
+        <Button
+            android:id="@+id/crime_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:text="选择日期"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/crime_time_text"
+            style="?android:listSeparatorTextViewStyle"
+            />
 
     <Button
         android:layout_width="match_parent"
@@ -37,7 +62,9 @@
         android:id="@+id/crime_time"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:text="选择时间"
         />
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/crime_solved"

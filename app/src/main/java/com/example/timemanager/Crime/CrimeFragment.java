@@ -1,7 +1,6 @@
 package com.example.timemanager.Crime;
 
 import android.app.Activity;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -29,9 +29,12 @@ public class CrimeFragment extends Fragment {
     private static final String DIALOG_TIME = "DialogTime";
 
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_TIME = 1;
 
     private Crime mCrime;
     private EditText mTitleField;
+    private TextView mDateText;
+    private TextView mTimeText;
     private Button mDateButton;
     private Button mTimeButton;
     private Button mSaveButton;
@@ -58,6 +61,9 @@ public class CrimeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_crime, container, false);
 
+        mDateText = (TextView) v.findViewById(R.id.crime_date_text);
+        mTimeText = (TextView) v.findViewById(R.id.crime_time_text);
+
         mTitleField = (EditText) v.findViewById(R.id.crime_title);
         mTitleField.setText(mCrime.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
@@ -83,6 +89,8 @@ public class CrimeFragment extends Fragment {
         mDeleteButton = (Button) v.findViewById(R.id.crime_cancel);
 
         updateDate();
+        //mDateText.setText(mCrime.getMonth()+1+"月"+mCrime.getdate()+"日 星期"+mCrime.getday());
+        //mTimeText.setText(mCrime.getnowhour()+":"+mCrime.getnowminute());
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,7 +107,7 @@ public class CrimeFragment extends Fragment {
                 FragmentManager manager = getFragmentManager();
                 TimePickerFragment dialog = TimePickerFragment
                         .newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this,REQUEST_DATE);
+                dialog.setTargetFragment(CrimeFragment.this,REQUEST_TIME);
                 dialog.show(manager,DIALOG_TIME);
             }
         });
@@ -140,20 +148,22 @@ public class CrimeFragment extends Fragment {
             Date date = (Date) data
                     .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
+            mDateText.setText(mCrime.getMonth()+1+"月"+mCrime.getdate()+"日 星期"+mCrime.getday());
+            //updateDate();
+        }
+        if(requestCode == REQUEST_TIME) {
+            int hour = data.getIntExtra(TimePickerFragment.EXTRA_HOUR,0);
+            int minute = data.getIntExtra(TimePickerFragment.EXTRA_MINUTE,0);
+            mCrime.setHour(hour);
+            mCrime.setMinute(minute);
             updateDate();
         }
     }
 
     private void updateDate() {
-        //int day1 = mCrime.getDate().getYear();
-        //int day2 = mCrime.getDate().getMonth();
-        //int day3 = mCrime.getDate().getDay();
-        //int day4 = mCrime.getDate().getDate();
-        //int hour = mCrime.getDate().getHours();
-        //int minute = mCrime.getDate().getMinutes();
-        //String day = day1+"年"+day2 +"月"+day3+"日 星期"+day4;
-        //String time = hour + ":" + minute;
-        mDateButton.setText(mCrime.getDate().toString());
-        mTimeButton.setText(mCrime.getDate().toString());
+        //mDateButton.setText(mCrime.getDate().toString());
+        //mTimeButton.setText(mCrime.getDate().toString());
+        mDateText.setText(mCrime.getMonth()+1+"月"+mCrime.getdate()+"日 星期"+mCrime.getday());
+        mTimeText.setText(mCrime.gethour()+":"+mCrime.getminute());
     }
 }

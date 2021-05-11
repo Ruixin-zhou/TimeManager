@@ -24,11 +24,14 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-    public static final String EXTRA_DATE =
-            "com.bignerdranch.android.criminalintent.date";
+    public static final String EXTRA_HOUR =
+            "com.example.timemanager.Crime.hour";
+    public static final String EXTRA_MINUTE =
+            "com.example.timemanager.Crime.minute";
 
-    private static final String ARG_TIME = "date";
+    private static final String ARG_TIME = "time";
     private TimePicker mTimePicker;
+    private DatePicker mDatePicker;
 
     @NonNull
     @Override
@@ -41,13 +44,23 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         View v = LayoutInflater.from(getActivity())
                 .inflate(R.layout.dialog_time,null);
+        //View v2 = LayoutInflater.from(getActivity()).inflate(R.layout.dialog_date, null);
 
         mTimePicker = (TimePicker)v.findViewById(R.id.dialog_time_time_picker);
+        //mDatePicker = (DatePicker)v2.findViewById(R.id.dialog_date_date_picker);
 
         return new AlertDialog.Builder(getActivity())
                 .setView(v)
                 .setTitle(R.string.time_picker_title)
-                .setPositiveButton(android.R.string.ok,null)
+                .setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int hour = mTimePicker.getCurrentHour();
+                                int minute = mTimePicker.getCurrentMinute();
+                                sendResult(Activity.RESULT_OK,hour,minute);
+                            }
+                        })
                 .create();
     }
 
@@ -60,13 +73,14 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         return fragment;
     }
 
-    private void sendResult(int resultCode, Date date) {
+    private void sendResult(int resultCode, int hour,int minute) {
         if (getTargetFragment() == null) {
             return;
         }
 
         Intent intent = new Intent();
-        intent.putExtra(EXTRA_DATE, date);
+        intent.putExtra(EXTRA_HOUR, hour);
+        intent.putExtra(EXTRA_MINUTE,minute);
 
         getTargetFragment()
                 .onActivityResult(getTargetRequestCode(), resultCode, intent);

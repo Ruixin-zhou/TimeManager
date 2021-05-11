@@ -144,8 +144,9 @@ public class CrimeListFragment extends Fragment {
 
         public void bindCrime(Crime crime) {
             mCrime = crime;
+            String date = mCrime.getMonth()+1+"月"+mCrime.getdate()+"日 星期"+mCrime.getday()+"  "+mCrime.gethour()+":"+mCrime.getminute();
             mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
+            mDateTextView.setText(date.toString());
             mSolvedCheckBox.setChecked(mCrime.isSolved());
         }
 
