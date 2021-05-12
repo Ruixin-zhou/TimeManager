@@ -36,7 +36,6 @@ public class LoadActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String password = mPassword.getText().toString();
                 final String true_password = "8888"; // 管理员密码
-
                 if (password.equals(true_password))
                 {
                     Intent i = new Intent(LoadActivity.this, CourseEntryActivity.class);
@@ -51,9 +50,8 @@ public class LoadActivity extends AppCompatActivity {
             public void onClick(View v) {
                 final String password = mPassword.getText().toString();
                 final String true_password = "6666";//学生默认密码
-
                 if(password.equals(true_password)){
-                    Intent i = new Intent(LoadActivity.this, CrimeListActivity.class);
+                    Intent i = new Intent(LoadActivity.this, AllEventActivity.class);
                     startActivity(i);
                 }
                 else { Toast.makeText(LoadActivity.this,R.string.incorrect_toast,Toast.LENGTH_SHORT).show(); }

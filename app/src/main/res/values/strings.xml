@@ -21,8 +21,17 @@
     <string name="date_picker_title">事件日期:</string>
     <string name="time_picker_title">事件时间：</string>
     <string name="new_crime">New Crime</string>
-    <string name="show_subtitle">Show Subtitle</string>
-    <string name="hide_subtitle">Hide Subtitle</string>
-    <string name="subtitle_format">%1$s crimes</string>
+    <string name="show_subtitle">计划数目</string>
+    <string name="hide_subtitle">隐藏</string>
+    <string name="subtitle_format">%1$s 项自习</string>
+
+    <string name="course_time">课程安排</string>
+    <string name="course_time_text">共 %1$s 节课</string>
+    <string name="study_time">自习安排</string>
+    <string name="study_time_text">自习计划</string>
+    <string name="meeting_time">开会时间</string>
+    <string name="meeting_time_text">暂无计划</string>
+    <string name="daily_time">其余安排</string>
+    <string name="daily_time_text">详情</string>
 
 </resources>
