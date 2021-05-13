@@ -1,51 +1,32 @@
 package com.example.timemanager;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.timemanager.Crime.CrimeLab;
-import com.example.timemanager.Crime.CrimeListActivity;
+import com.example.timemanager.Crime.AllEventFragment;
+import com.example.timemanager.Crime.DailyListActivity;
+import com.example.timemanager.Crime.SingleFragmentActivity;
+import com.example.timemanager.Crime.StudyListActivity;
+import com.example.timemanager.Meeting.Meeting;
+import com.example.timemanager.Meeting.MeetingActivity;
+import com.example.timemanager.Meeting.MeetingFragment;
 
-public class AllEventActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
-    private Button mClassButton;
-    private Button mStudyButton;
-    private Button mMeettingButton;
-    private Button mDailyButton;
+public class AllEventActivity extends SingleFragmentActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event);
-
-        mStudyButton = (Button)findViewById(R.id.study_button);
-        mMeettingButton = (Button)findViewById(R.id.meetting_time_button);
-        mDailyButton = (Button)findViewById(R.id.daily_time_button);
-
-
-        mStudyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AllEventActivity.this, CrimeListActivity.class);
-                startActivity(i);
-            }
-        });
-
-        mDailyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AllEventActivity.this, CrimeListActivity.class);
-                startActivity(i);
-            }
-        });
-
-    }
-
-
+    protected Fragment createFragment() { return new AllEventFragment(); }
 }

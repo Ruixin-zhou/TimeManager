@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">TimeManager</string>
+    <string name="load_activity">登录</string>
+    <string name="all_event">当日计划</string>
+    <string name="study_list">自习列表</string>
+    <string name="daily_list">日常列表</string>
+    <string name="add">添加事项</string>
+
 
     <string name="incorrect_toast">密码错误</string>
 
@@ -26,12 +32,15 @@
     <string name="subtitle_format">%1$s 项自习</string>
 
     <string name="course_time">课程安排</string>
-    <string name="course_time_text">共 %1$s 节课</string>
+    <string name="course_time_button">所有课程</string>
     <string name="study_time">自习安排</string>
-    <string name="study_time_text">自习计划</string>
+    <string name="study_time_text">暂无自习计划</string>
+    <string name="study_time_button">添加自习</string>
     <string name="meeting_time">开会时间</string>
-    <string name="meeting_time_text">暂无计划</string>
+    <string name="meeting_time_text">15:50   WM1106   班级会议</string>
+    <string name="meeting_time_button">添加会议</string>
     <string name="daily_time">其余安排</string>
-    <string name="daily_time_text">详情</string>
+    <string name="daily_time_button">详情</string>
+    <string name="daily_time_text">暂无其余安排</string>
 
 </resources>

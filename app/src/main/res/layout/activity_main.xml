@@ -71,7 +71,7 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:id="@+id/manager_load_button"
-            android:text="管理员登陆"
+            android:text="管理员登录"
             />
 
     </LinearLayout>

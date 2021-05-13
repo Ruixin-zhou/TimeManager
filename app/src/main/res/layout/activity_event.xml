@@ -5,28 +5,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/today_date_text"
+        android:textSize="18dp"
+        android:gravity="center"
+        />
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        >
+        android:layout_height="wrap_content">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/course_time"
             android:textSize="18dp"
-            android:layout_weight="1"
             style="?android:listSeparatorTextViewStyle"
+            android:layout_weight="1"
             />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="98dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:id="@+id/course_all_button"
+            android:text="@string/course_time_button"
+            android:textSize="18dp"
             />
 
     </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18dp"
+        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,28 +49,31 @@
         android:orientation="horizontal"
         >
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/study_time"
             android:textSize="18dp"
-            android:layout_weight="1"
             style="?android:listSeparatorTextViewStyle"
+            android:layout_weight="1"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="98dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:gravity="center"
+            android:id="@+id/study_button"
+            android:text="@string/study_time_button"
+            android:textSize="18dp"
             />
 
     </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:id="@+id/study_button"
+        android:id="@+id/study_text"
         android:text="@string/study_time_text"
-        android:textSize="18dp"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,24 +85,27 @@
             android:layout_height="wrap_content"
             android:text="@string/meeting_time"
             android:textSize="18dp"
-            android:layout_weight="1"
             style="?android:listSeparatorTextViewStyle"
+            android:layout_weight="1"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="98dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:gravity="center"
+            android:id="@+id/meetting_time_button"
+            android:text="@string/meeting_time_button"
+            android:textSize="18dp"
             />
-
     </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/meetting_time_button"
+        android:id="@+id/meeting_time_text"
         android:text="@string/meeting_time_text"
-        android:textSize="18dp"
+        android:gravity="left"
+        android:layout_marginLeft="100dp"
         />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -92,26 +113,27 @@
         android:orientation="horizontal"
         >
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/daily_time"
             android:textSize="18dp"
-            android:layout_weight="1"
             style="?android:listSeparatorTextViewStyle"
+            android:layout_weight="1"
             />
-        <TextView
-            android:layout_width="wrap_content"
+        <Button
+            android:layout_width="98dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:gravity="center"
+            android:id="@+id/daily_time_button"
+            android:text="@string/daily_time_button"
+            android:textSize="18dp"
             />
-
     </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:id="@+id/daily_time_button"
+        android:id="@+id/daily_text"
         android:text="@string/daily_time_text"
-        android:textSize="18dp"
         />
 </LinearLayout>

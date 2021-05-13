@@ -1,5 +1,7 @@
 package com.example.timemanager.Crime;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,17 +18,23 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.timemanager.Meeting.Meeting;
 import com.example.timemanager.R;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CrimeListFragment extends Fragment {
+public class DailyListFragment extends Fragment {
 
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
 
-    private RecyclerView mCrimeRecyclerView;
+    public static final String EXTRA_DAILY_SUM =
+            "com.example.timemanager.Crime.daily_sum";
+
+    private RecyclerView mDailyRecyclerView;
     private CrimeAdapter mAdapter;
     private boolean mSubtitleVisible;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,11 +45,11 @@ public class CrimeListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_daily_list, container, false);
 
-        mCrimeRecyclerView = (RecyclerView) view
-                .findViewById(R.id.crime_recycler_view);
-        mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mDailyRecyclerView = (RecyclerView) view
+                .findViewById(R.id.daily_recycler_view);
+        mDailyRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
@@ -81,10 +89,10 @@ public class CrimeListFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_new_crime:
-                Crime crime = new Crime();
-                CrimeLab.get(getActivity()).addCrime(crime);        //添加crime
-                Intent intent = CrimePagerActivity
-                        .newIntent(getActivity(), crime.getId());
+                Daily daily = new Daily();
+                DailyLab.get(getActivity()).addCrime(daily);        //添加crime 变成crime没问题
+                Intent intent = DailyPagerActivity
+                        .newIntent(getActivity(), daily.getId());
                 startActivity(intent);
                 return true;
             case R.id.menu_item_show_subtitle:
@@ -98,9 +106,9 @@ public class CrimeListFragment extends Fragment {
     }
 
     private void updateSubtitle() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        int crimeCount = crimeLab.getCrimes().size();
-        String subtitle = getString(R.string.subtitle_format, crimeCount);
+        DailyLab crimeLab = DailyLab.get(getActivity());
+        int crimeCount = crimeLab.getDailys().size();
+        @SuppressLint("StringFormatMatches") String subtitle = getString(R.string.subtitle_format, crimeCount);
 
         if (!mSubtitleVisible) {
             subtitle = null;
@@ -111,12 +119,12 @@ public class CrimeListFragment extends Fragment {
     }
 
     private void updateUI() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        List<Crime> crimes = crimeLab.getCrimes();
+        DailyLab crimeLab = DailyLab.get(getActivity());
+        List<Daily> crimes = crimeLab.getDailys();
 
         if (mAdapter == null) {
             mAdapter = new CrimeAdapter(crimes);
-            mCrimeRecyclerView.setAdapter(mAdapter);
+            mDailyRecyclerView.setAdapter(mAdapter);
         } else {
             mAdapter.notifyDataSetChanged();
         }
@@ -124,14 +132,14 @@ public class CrimeListFragment extends Fragment {
         updateSubtitle();
     }
 
-    private class CrimeHolder extends RecyclerView.ViewHolder 
+    private class CrimeHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         private TextView mTitleTextView;
         private TextView mDateTextView;
         private CheckBox mSolvedCheckBox;
 
-        private Crime mCrime;
+        private Daily mCrime;
 
         public CrimeHolder(View itemView) {
             super(itemView);
@@ -142,7 +150,7 @@ public class CrimeListFragment extends Fragment {
             mSolvedCheckBox = (CheckBox) itemView.findViewById(R.id.list_item_crime_solved_check_box);
         }
 
-        public void bindCrime(Crime crime) {
+        public void bindCrime(Daily crime) {
             mCrime = crime;
             String date = mCrime.getMonth()+1+"月"+mCrime.getdate()+"日 星期"+mCrime.getday()+"  "+mCrime.gethour()+":"+mCrime.getminute();
             mTitleTextView.setText(mCrime.getTitle());
@@ -152,16 +160,16 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            Intent intent = CrimePagerActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = DailyPagerActivity.newIntent(getActivity(), mCrime.getId());
             startActivity(intent);
         }
     }
 
     private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
 
-        private List<Crime> mCrimes;
+        private List<Daily> mCrimes;
 
-        public CrimeAdapter(List<Crime> crimes) {
+        public CrimeAdapter(List<Daily> crimes) {
             mCrimes = crimes;
         }
 
@@ -174,13 +182,20 @@ public class CrimeListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(CrimeHolder holder, int position) {
-            Crime crime = mCrimes.get(position);
+            Daily crime = mCrimes.get(position);
             holder.bindCrime(crime);
+            sendDailyMessage(mCrimes.size());
         }
 
         @Override
         public int getItemCount() {
             return mCrimes.size();
         }
+    }
+
+    public void sendDailyMessage(int dailysum){
+        Intent data = new Intent();
+        data.putExtra(EXTRA_DAILY_SUM, (Serializable) dailysum);
+        getActivity().setResult(Activity.RESULT_OK,data);
     }
 }
