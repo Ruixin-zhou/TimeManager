@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.timemanager.AllEventActivity;
+import com.example.timemanager.ClassTable.activity.ClassMainActivity;
 import com.example.timemanager.Meeting.Meeting;
 import com.example.timemanager.Meeting.MeetingActivity;
 import com.example.timemanager.Meeting.MeetingFragment;
@@ -25,6 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 public class AllEventFragment extends Fragment {
     private static final int REQUEST_MEETING = 2;
@@ -43,6 +45,8 @@ public class AllEventFragment extends Fragment {
     private Button mStudyButton;
     private Button mMeettingButton;
     private Button mDailyButton;
+
+    private static String mWay;
 
 
     @Override
@@ -67,7 +71,32 @@ public class AllEventFragment extends Fragment {
         calendarSaledefaultEnd.add(calendarSaledefaultEnd.DATE, 0);
         String time = new SimpleDateFormat("yyyy-MM-dd")
                 .format(calendarSaledefaultEnd.getTime());
-        mTodayDateText.setText(time);
+        final Calendar calendar = Calendar.getInstance();
+        //calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        int date = calendar.get(Calendar.DAY_OF_WEEK);
+        switch (date){
+            case 2 :
+                mWay = "一";
+                break;
+            case 3:
+                mWay = "二";
+                break;
+            case 4 :
+                mWay = "三";
+                break;
+            case 5:
+                mWay = "四";
+                break;
+            case 6 :
+                mWay = "五";
+                break;
+            case 7:
+                mWay = "六";
+                break;
+            default:
+                mWay = "日";
+        }
+        mTodayDateText.setText(time+" 星期"+mWay);
 
         mClassButton = (Button)view.findViewById(R.id.course_all_button);
         mStudyButton = (Button)view.findViewById(R.id.study_button);
@@ -78,6 +107,8 @@ public class AllEventFragment extends Fragment {
         mClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(getActivity(), ClassMainActivity.class);
+                startActivity(i);
             }
         });
         mStudyButton.setOnClickListener(new View.OnClickListener() {
