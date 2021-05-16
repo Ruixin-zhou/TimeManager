@@ -17,26 +17,40 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.timemanager.AllEventActivity;
 import com.example.timemanager.ClassTable.activity.ClassMainActivity;
+import com.example.timemanager.ClassTable.pojo.Class_Table_Course;
 import com.example.timemanager.Meeting.Meeting;
 import com.example.timemanager.Meeting.MeetingActivity;
 import com.example.timemanager.Meeting.MeetingFragment;
 import com.example.timemanager.R;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.TimeZone;
+import java.util.zip.CRC32;
+
+import static com.example.timemanager.ClassTable.pojo.Class_Table_Course.AddExample;
 
 public class AllEventFragment extends Fragment {
     private static final int REQUEST_MEETING = 2;
     private static final int REQUEST_STUDY = 3;
     private static final int REQUEST_DAILY = 4;
-    private static final String DIALOG_MEETING_TIME = "DialogMeetingTime";
+    private static final int REQUEST_ALLCLASS = 5;
+
+
+    public static final String EXTRA_ALLEVENT_ALLCLASS =
+            "com.example.timemanager.Crime.allclass";
+
+    int p = 1;
 
     private Meeting mMeeting;
 
     private TextView mTodayDateText;
+    private TextView mAllClassText;
     private TextView mMeetingTimeText;
     private TextView mStudyText;
     private TextView mDailyText;
@@ -48,6 +62,7 @@ public class AllEventFragment extends Fragment {
 
     private static String mWay;
 
+    private static List<Class_Table_Course> allClass;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,9 +77,12 @@ public class AllEventFragment extends Fragment {
 
 
         mTodayDateText = (TextView)view.findViewById(R.id.today_date_text);
+        mAllClassText = (TextView)view.findViewById(R.id.all_course);
         mMeetingTimeText = (TextView)view.findViewById(R.id.meeting_time_text) ;
         mStudyText = (TextView)view.findViewById(R.id.study_text) ;
         mDailyText = (TextView)view.findViewById(R.id.daily_text);
+
+        final List<Class_Table_Course> course = new ArrayList<>();
 
         Calendar calendarSaledefaultEnd = new GregorianCalendar();
         calendarSaledefaultEnd.setTime(new Date());
@@ -72,30 +90,8 @@ public class AllEventFragment extends Fragment {
         String time = new SimpleDateFormat("yyyy-MM-dd")
                 .format(calendarSaledefaultEnd.getTime());
         final Calendar calendar = Calendar.getInstance();
-        //calendar.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         int date = calendar.get(Calendar.DAY_OF_WEEK);
-        switch (date){
-            case 2 :
-                mWay = "一";
-                break;
-            case 3:
-                mWay = "二";
-                break;
-            case 4 :
-                mWay = "三";
-                break;
-            case 5:
-                mWay = "四";
-                break;
-            case 6 :
-                mWay = "五";
-                break;
-            case 7:
-                mWay = "六";
-                break;
-            default:
-                mWay = "日";
-        }
+        mWay = intToString(date-1);
         mTodayDateText.setText(time+" 星期"+mWay);
 
         mClassButton = (Button)view.findViewById(R.id.course_all_button);
@@ -103,18 +99,25 @@ public class AllEventFragment extends Fragment {
         mMeettingButton = (Button)view.findViewById(R.id.meetting_time_button);
         mDailyButton = (Button)view.findViewById(R.id.daily_time_button);
 
+        if(p == 1 ){
+            AddExample(0,course);
+            allClass = course;
+            int m = updateClass(course);
+            mStudyText.setText("共有"+m+"节自习");
+            p=0;
+        }
 
         mClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getActivity(), ClassMainActivity.class);
-                startActivity(i);
+                startActivityForResult(i,REQUEST_ALLCLASS);
             }
         });
         mStudyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), StudyListActivity.class);
+                Intent i = newIntent(getActivity(),allClass);
                 startActivityForResult(i,REQUEST_STUDY);
             }
         });
@@ -132,6 +135,8 @@ public class AllEventFragment extends Fragment {
                 startActivityForResult(i,REQUEST_DAILY);
             }
         });
+
+
 
         return view;
     }
@@ -163,5 +168,101 @@ public class AllEventFragment extends Fragment {
             String str = "共有"+StugySum+"节自习";
             mStudyText.setText(str);
         }
+
+        if(requestCode == REQUEST_ALLCLASS){
+            allClass = (List<Class_Table_Course>)data.getSerializableExtra(ClassMainActivity.EXTRA_CLASSTABLE_ALLCLASS);
+            updateClass(allClass);
+        }
+    }
+
+    public static Intent newIntent(Context packageContext, List<Class_Table_Course> useClass){
+        Intent i =new Intent(packageContext,StudyListActivity.class);
+        i.putExtra(EXTRA_ALLEVENT_ALLCLASS, (Serializable) useClass);
+        return i;
+    }
+
+    private int updateClass(List<Class_Table_Course> allClass){
+        int count = allClass.size();
+        int sum = 0;
+        Class_Table_Course course;
+        String FinalCourseName = "";
+        String FinalCourseTime = "";
+        String FinalCourseRoom = "";
+        String str = "";
+        for(int i = 0;i<count;i++){
+            course = allClass.get(i);
+            String[] courseArray = course.getCourseTime().split(";");
+            for (int j = 0; j < courseArray.length; j++){
+                String[] info = courseArray[j].split(":");
+                int flag = Integer.parseInt(info[0]);
+                String day ;
+                day = intToString(flag);
+                if((mWay.equals("五") ||mWay.equals("六") || mWay.equals("日"))&& (flag == 1 || flag == 2) && !course.getCourseName().equals("体育（篮球）")){     //今天是星期五并且在周一与周二有课
+                    sum++;
+                }
+                if(day.equals(mWay)){
+                    FinalCourseName = course.getCourseName();
+                    FinalCourseTime = info[1];
+                    switch (FinalCourseTime){
+                        case "1":
+                            FinalCourseTime = "08:30";
+                            break;
+                        case "2":
+                            FinalCourseTime = "09:10";
+                            break;
+                        case "3":
+                            FinalCourseTime = "10:05";
+                            break;
+                        case "4":
+                            FinalCourseTime = "11:15";
+                            break;
+                        case "5":
+                            FinalCourseTime = "14:00";
+                            break;
+                        case "6":
+                            FinalCourseTime = "14:40";
+                            break;
+                        case "7":
+                            FinalCourseTime = "15:35";
+                            break;
+                            default:
+                                FinalCourseTime = "19:00";
+
+                    }
+                    FinalCourseRoom = info[3];
+                    str = str +FinalCourseName+" "+FinalCourseTime+" "+FinalCourseRoom+ "\n" ;
+                }
+            }
+        }
+        mAllClassText.setText(str);
+
+        return sum;
+    }
+
+    public String intToString(int i){
+        String str;
+        switch (i){
+            case 1 :
+                str = "一";
+                break;
+            case 2:
+                str = "二";
+                break;
+            case 3 :
+                str = "三";
+                break;
+            case 4:
+                str = "四";
+                break;
+            case 5 :
+                str = "五";
+                break;
+            case 6:
+                str = "六";
+                break;
+            default:
+                str = "日";
+        }
+        return str;
     }
 }

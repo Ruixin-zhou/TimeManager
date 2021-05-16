@@ -14,6 +14,9 @@ import com.example.timemanager.ClassTable.pojo.Class_Table_Course;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.timemanager.ClassTable.pojo.Class_Table_Course.AddExample;
+import static com.example.timemanager.ClassTable.pojo.Class_Table_Course.toCourse;
+
 public class CourseDao extends SQLiteOpenHelper {
 
     private String tableName = "t_course";
@@ -114,9 +117,11 @@ public class CourseDao extends SQLiteOpenHelper {
     }
 
     public List<Class_Table_Course> listAll(){
+        int flag = 0;
         List<Class_Table_Course> list = new ArrayList<>();
         SQLiteDatabase database = getWritableDatabase();
         Cursor data = database.query(tableName, null, null, null, null, null, null);
+        AddExample(flag,list);
         if(data.getCount() > 0){
             while(data.moveToNext()) {
                 Class_Table_Course course = new Class_Table_Course();
@@ -131,6 +136,7 @@ public class CourseDao extends SQLiteOpenHelper {
                 course.setEndWeek(data.getInt(8));
                 course.setCourseTime(data.getString(9));
                 list.add(course);
+                flag = data.getInt(0);
             }
         }
         database.close();

@@ -41,14 +41,14 @@ public class ExampleUnitTest {
         JSONObject jsonObject = new JSONObject();
 
         List<Class_Table_Course> classTableCourseList = new ArrayList<>();
-        classTableCourseList.add((new Class_Table_Course("形式与政策", "肖惠朝", 1, 7, "3:5:s:XC-D")));
-        classTableCourseList.add((new Class_Table_Course("计算机信息安全", "李照明", 1, 11, "3:5:d:XC207;5:3:n:XC205")));
-        classTableCourseList.add((new Class_Table_Course("软件工程", "彭惠玲", 1, 12, "2:3:n:XC412;5:1:n:XC308")));
-        classTableCourseList.add((new Class_Table_Course("Web前端开发", "罗豪凡", 1, 12, "1:5:n:XC412;3:1:n:XC412")));
-        classTableCourseList.add((new Class_Table_Course("JavaWeb高级编程", "刁文广", 5, 16, "1:3:n:XC412;3:7:n:XC412")));
-        classTableCourseList.add((new Class_Table_Course("Android应用开发", "卢向华", 5, 16, "4:3:n:XD110;5:5:n:XC310")));
-        classTableCourseList.add((new Class_Table_Course("计算机视觉应用", "王国强", 1, 8, "2:5:n:XC305;4:1:n:XC409")));
-        classTableCourseList.add((new Class_Table_Course("计算机新技术", "李淳凡", 6, 9, "1:1:n:XC4;1:7:n:XC4;2:1:n:XC4;3:3:n:XC4")));
+        classTableCourseList.add((new Class_Table_Course("材料力学", "靳玉佳", 1, 12, "1:1:n:WH2203;5:1:n:WH2203;3:3:n:WH2203")));
+        classTableCourseList.add((new Class_Table_Course("大学英语", "杜瑜皎", 1, 14, "1:5:n:WX3202;4:1:n:WX2402")));
+        classTableCourseList.add((new Class_Table_Course("数字电子技术基础", "楚岩", 1, 16, "1:7:n:WM1508;3:1:n:WM1508")));
+        classTableCourseList.add((new Class_Table_Course("概率论与数理统计", "王明辉", 1, 12, "2:1:n:WM3201;4:3:n:WM3201")));
+        classTableCourseList.add((new Class_Table_Course("体育（篮球）", "马敏", 1, 18, "2:3:n:体育馆一楼篮球馆")));
+        classTableCourseList.add((new Class_Table_Course("流体力学", "朱文锋", 1, 16, "2:5:n:WM3303")));
+        classTableCourseList.add((new Class_Table_Course("毛泽东思想和中国特色社会主义理论体系概论", "薛睿", 1, 16, "2:7:n:WM1201;4:5:n:WM3201")));
+        classTableCourseList.add((new Class_Table_Course("计算方法", "孙东霖", 4, 13, "3:7:n:WH1103;5:3:n:WH1103")));
 
         JSONArray courses = JSON.parseArray(JSON.toJSONString(classTableCourseList));
 

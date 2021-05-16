@@ -13,11 +13,16 @@ import com.example.timemanager.R;
 import com.example.timemanager.ClassTable.pojo.Class_Table_Course;
 import com.example.timemanager.ClassTable.view.TimeTableView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.timemanager.ClassTable.pojo.Class_Table_Course.AddExample;
+
 public class ClassMainActivity extends AppCompatActivity {
+    public static final String EXTRA_CLASSTABLE_ALLCLASS =
+            "com.example.timemanager.ClassTable.activity.allclass";
 
     private CourseDao courseDao = new CourseDao(this);
     private TimeTableView timeTable;
@@ -54,6 +59,7 @@ public class ClassMainActivity extends AppCompatActivity {
             sp.edit().putBoolean("isFirstUse", false).apply();
         }else {
             courses = courseDao.listAll();
+            sendAllClass(courses);
         }
         return courses;
     }
@@ -64,5 +70,11 @@ public class ClassMainActivity extends AppCompatActivity {
     public void categoryListener() {
         Intent intent = new Intent(this, OptionActivity.class);
         startActivity(intent);
+    }
+
+    private void sendAllClass(List<Class_Table_Course> allClass){
+        Intent data = new Intent();
+        data.putExtra(EXTRA_CLASSTABLE_ALLCLASS, (Serializable) allClass);
+        setResult(RESULT_OK,data);
     }
 }

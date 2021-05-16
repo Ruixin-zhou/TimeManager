@@ -10,6 +10,7 @@ public class Crime {
     private Date mDate;
     private int mHour;
     private int mMinute;
+    private String mUseMinute;
     private boolean mSolved;
 
     public Crime() {
@@ -55,10 +56,12 @@ public class Crime {
     public int getnowminute() {return mDate.getMinutes();}
     public int gethour() {return  mHour;}
     public int getminute() {return mMinute;}
+    public String getmUseMinute() {return mUseMinute;}
 
     public void setDate(Date date) { mDate = date;}
     public void setHour(int hour){mHour = hour;}
     public void setMinute(int minute){mMinute = minute;}
+    public void setUseMinute (String useMinute){mUseMinute = useMinute;}
 
     public boolean isSolved() {
         return mSolved;

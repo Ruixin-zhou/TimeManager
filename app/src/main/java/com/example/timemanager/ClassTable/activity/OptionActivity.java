@@ -24,6 +24,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.timemanager.ClassTable.pojo.Class_Table_Course.AddExample;
+
 public class OptionActivity extends AppCompatActivity {
 
     private CourseDao courseDao = new CourseDao(this);
@@ -103,6 +105,7 @@ public class OptionActivity extends AppCompatActivity {
                             classTableCourse.setTeacherName(teacherName);
                             classTableCourse.setStartWeek(Integer.parseInt(startWeek));
                             classTableCourse.setEndWeek(Integer.parseInt(endWeek));
+                            classTableCourse.setUseMinute(20);
                             long insert = courseDao.insert(classTableCourse);
                             if (insert != -1) {
                                 Toast.makeText(OptionActivity.this, "添加课程成功！", Toast.LENGTH_SHORT).show();

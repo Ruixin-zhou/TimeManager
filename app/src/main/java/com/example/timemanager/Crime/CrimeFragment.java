@@ -33,6 +33,7 @@ public class CrimeFragment extends Fragment {
 
     private Crime mCrime;
     private EditText mTitleField;
+    private EditText mUseMinute;
     private TextView mDateText;
     private TextView mTimeText;
     private Button mDateButton;
@@ -83,14 +84,32 @@ public class CrimeFragment extends Fragment {
             }
         });
 
+        mUseMinute = (EditText)v.findViewById(R.id.crime_useminute_text);
+        final String str = mCrime.getmUseMinute();
+        if(str == null){
+            mUseMinute.setText("0");
+            mCrime.setUseMinute("0");
+        }
+        else {
+            mUseMinute.setText(""+mCrime.getmUseMinute());
+        }
+        mUseMinute.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mCrime.setUseMinute(s.toString());
+            }
+            @Override
+            public void afterTextChanged(Editable s) { }
+        });
+
         mDateButton = (Button) v.findViewById(R.id.crime_date);
         mTimeButton = (Button) v.findViewById(R.id.crime_time);
         mSaveButton = (Button) v.findViewById(R.id.crime_save);
         mDeleteButton = (Button) v.findViewById(R.id.crime_cancel);
 
         updateDate();
-        //mDateText.setText(mCrime.getMonth()+1+"月"+mCrime.getdate()+"日 星期"+mCrime.getday());
-        //mTimeText.setText(mCrime.getnowhour()+":"+mCrime.getnowminute());
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

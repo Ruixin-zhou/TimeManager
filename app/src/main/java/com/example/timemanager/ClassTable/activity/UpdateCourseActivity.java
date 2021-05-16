@@ -112,7 +112,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
                 return;
             }
         }
-        Toast.makeText(UpdateCourseActivity.this, "删除失败！", Toast.LENGTH_SHORT).show();
+        Toast.makeText(UpdateCourseActivity.this, "固定课表无法删除！", Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -239,7 +239,7 @@ public class UpdateCourseActivity extends AppCompatActivity {
                             Toast.makeText(UpdateCourseActivity.this, "删除成功！", Toast.LENGTH_SHORT).show();
                             UpdateCourseActivity.this.finish();
                         } else {
-                            Toast.makeText(UpdateCourseActivity.this, "删除失败！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateCourseActivity.this, "固定课表无法删除！", Toast.LENGTH_SHORT).show();
                         }
                     }
                 })
